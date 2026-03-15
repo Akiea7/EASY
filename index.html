@@ -162,7 +162,6 @@
             progressFill.style.width = `${((level - 1) / 10) * 100}%`;
 
             if (level === 1) {
-                // المرحلة 1: التسخين والمربع المخفي
                 platforms.push({ x: 0, y: 500, w: 300, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 450, y: 500, w: 350, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 260, y: 350, w: 40, h: 40, type: 'hidden', revealed: false, color: '#FFD700' });
@@ -170,7 +169,6 @@
                 flag = { x: 700, y: 450, w: 40, h: 50 };
             } 
             else if (level === 2) {
-                // المرحلة 2: مسامير متلاحقة ومنصات مخفية
                 platforms.push({ x: 0, y: 500, w: 1000, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 150, y: 350, w: 40, h: 40, type: 'hidden', revealed: false, color: '#FFD700' });
                 platforms.push({ x: 300, y: 300, w: 40, h: 40, type: 'hidden', revealed: false, color: '#FFD700' });
@@ -181,7 +179,6 @@
                 flag = { x: 900, y: 450, w: 40, h: 50 };
             }
             else if (level === 3) {
-                // المرحلة 3: الأبراج والأشواك المتحركة
                 for(let i=0; i<6; i++) {
                     platforms.push({ x: i*200, y: 500 - i*50, w: 100, h: 100 + i*50, type: 'solid', color: '#2c3e50' });
                 }
@@ -191,7 +188,6 @@
                 flag = { x: 1050, y: 200, w: 40, h: 50 };
             }
             else if (level === 4) {
-                // المرحلة 4: منصات متحركة وأشواك سقفية
                 platforms.push({ x: 0, y: 500, w: 1200, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 0, y: 0, w: 1200, h: 20, type: 'solid', color: '#2c3e50' });
                 for (let i = 0; i < 6; i++) {
@@ -203,7 +199,6 @@
                 flag = { x: 1100, y: 50, w: 40, h: 50 };
             }
             else if (level === 5) {
-                // المرحلة 5: السقف القاتل العملاق
                 platforms.push({ x: 0, y: 500, w: 200, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 400, y: 500, w: 600, h: 100, type: 'solid', color: '#2c3e50' });
                 traps.push({ x: 200, y: 580, w: 200, h: 20, type: 'death' });
@@ -216,18 +211,16 @@
                 flag = { x: 850, y: 450, w: 40, h: 50 };
             }
             else if (level === 6) {
-                // المرحلة 6: فخ العلم المزيف (جديد)
                 platforms.push({ x: 0, y: 500, w: 800, h: 100, type: 'solid', color: '#2c3e50' });
                 fakeFlags.push({ x: 400, y: 450, w: 40, h: 50 }); // هذا العلم يقتلك!
                 platforms.push({ x: 380, y: 300, w: 80, h: 20, type: 'solid', color: '#2c3e50' });
                 flag = { x: 700, y: 450, w: 40, h: 50 }; // العلم الحقيقي
-                triggers.push({ // مقلب يخلي العلم الحقيقي يطفر
+                triggers.push({ 
                     x: 600, y: 0, w: 10, h: 600, active: true,
                     action: function() { flag.y = 150; platforms.push({ x: 680, y: 200, w: 80, h: 20, type: 'solid', color: '#2c3e50' }); this.active = false; }
                 });
             }
             else if (level === 7) {
-                // المرحلة 7: ليزر يشتغل ويطفى (جديد)
                 platforms.push({ x: 0, y: 500, w: 1000, h: 100, type: 'solid', color: '#2c3e50' });
                 for(let i=0; i<3; i++) {
                     lasers.push({ x: 300 + i*200, y: 0, w: 10, h: 500, active: true, toggleRate: 60 + i*20, counter: 0 });
@@ -235,7 +228,6 @@
                 flag = { x: 900, y: 450, w: 40, h: 50 };
             }
             else if (level === 8) {
-                // المرحلة 8: منصات تتساقط (جديد)
                 platforms.push({ x: 0, y: 500, w: 150, h: 100, type: 'solid', color: '#2c3e50' });
                 for(let i=0; i<5; i++) {
                     platforms.push({ x: 200 + i*120, y: 400 - i*30, w: 60, h: 20, type: 'falling_platform', color: '#e67e22', vy: 0, touched: false });
@@ -245,21 +237,17 @@
                 flag = { x: 900, y: 200, w: 40, h: 50 };
             }
             else if (level === 9) {
-                // المرحلة 9: ظلام دامس (مقلب الرؤية)
                 platforms.push({ x: 0, y: 500, w: 200, h: 100, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 300, y: 400, w: 100, h: 20, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 500, y: 300, w: 100, h: 20, type: 'solid', color: '#2c3e50' });
                 platforms.push({ x: 700, y: 200, w: 200, h: 400, type: 'solid', color: '#2c3e50' });
                 traps.push({ x: 0, y: 580, w: 1000, h: 20, type: 'death' });
-                // فخ مخفي بالظلام
                 traps.push({ x: 750, y: 180, w: 50, h: 20, type: 'death' }); 
                 flag = { x: 850, y: 150, w: 40, h: 50 };
             }
             else if (level === 10) {
-                // المرحلة 10: الجحيم (كل شيء مع بعض)
                 platforms.push({ x: 0, y: 500, w: 100, h: 100, type: 'solid', color: '#2c3e50' });
                 traps.push({ x: 100, y: 580, w: 1200, h: 20, type: 'death' });
-                
                 platforms.push({ x: 150, y: 400, w: 60, h: 20, type: 'falling_platform', color: '#e67e22', vy: 0, touched: false });
                 lasers.push({ x: 250, y: 0, w: 10, h: 600, active: true, toggleRate: 50, counter: 0 });
                 platforms.push({ x: 300, y: 300, w: 60, h: 20, type: 'moving_platform', color: '#d35400', direction: 1, speed: 3 });
@@ -273,11 +261,26 @@
                 flag = { x: 900, y: 350, w: 40, h: 50 };
             }
             else {
-                // الفوز النهائي
                 gameStarted = false;
                 document.getElementById('finalDeaths').innerText = deaths;
                 document.getElementById('finalTime').innerText = (gameTime / 1000).toFixed(1);
                 winScreen.style.display = 'flex';
+            }
+        }
+
+        // ------------------ إنشاء جسيمات ------------------
+        // هاي الدالة اللي جانت مفقودة وسببت التوقف (Crash)
+        function createParticles(x, y, count, color) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: (Math.random() - 0.5) * 6,
+                    size: Math.random() * 3 + 2,
+                    color: color,
+                    life: 30
+                });
             }
         }
 
@@ -296,7 +299,7 @@
             player.trail.push({x: player.x, y: player.y});
             if(player.trail.length > 10) player.trail.shift();
 
-            // الحركة الأفقية (دعم كيبورد WASD والأسهم)
+            // الحركة الأفقية
             if (keys['ArrowLeft'] || keys['a'] || keys['A'] || keys['btnLeft']) { player.vx = -player.speed; player.facing = 'left'; }
             else if (keys['ArrowRight'] || keys['d'] || keys['D'] || keys['btnRight']) { player.vx = player.speed; player.facing = 'right'; }
             else player.vx = 0;
@@ -305,7 +308,7 @@
             if ((keys['ArrowUp'] || keys['w'] || keys['W'] || keys['btnJump']) && player.grounded) {
                 player.vy = player.jumpPower;
                 player.grounded = false;
-                // إنشاء جسيمات للقفزة
+                // إنشاء غبار للقفزة
                 createParticles(player.x + player.w/2, player.y + player.h, 8, '#fff');
             }
 
@@ -333,12 +336,12 @@
                         player.y = p.y - player.h;
                         player.vy = 0;
                         player.grounded = true;
-                        if(p.type === 'falling_platform') p.touched = true; // تفعيل السقوط
+                        if(p.type === 'falling_platform') p.touched = true;
                     } else if (player.vy < 0) { // ضرب الرأس
                         player.y = p.y + p.h;
                         player.vy = 0;
                         if (p.type === 'hidden') {
-                            p.revealed = true; // كشف الفخ
+                            p.revealed = true;
                             player.vy = 3;
                         }
                     }
@@ -365,7 +368,7 @@
                     p.x += p.speed * p.direction;
                     if (p.x <= 0 || p.x + p.w >= 1100) p.direction *= -1;
                 } else if (p.type === 'falling_platform' && p.touched) {
-                    p.vy += gravity * 0.5; // تسقط ببطء
+                    p.vy += gravity * 0.5;
                     p.y += p.vy;
                 }
             }
@@ -388,7 +391,7 @@
                 if(checkCollision(player, ff)) die();
             }
 
-            // الحساسات (Triggers)
+            // الحساسات
             for (let t of triggers) {
                 if (t.active && checkCollision(player, t)) t.action();
             }
@@ -409,37 +412,32 @@
                 if (particles[i].life <= 0) particles.splice(i, 1);
             }
             
-            // تحديث الكاميرا
+            // الكاميرا
             cameraOffsetX = player.x - canvas.width / 3;
             if (cameraOffsetX < 0) cameraOffsetX = 0;
         }
 
         // ------------------ نظام الرسم ------------------
         function draw() {
-            // رسم الخلفية
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, "#1a1a2e");
             gradient.addColorStop(1, "#16213e");
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // النجوم بالخلفية
             for(let i=0; i<20; i++) {
                 ctx.fillStyle = `rgba(255,255,255,${0.1 + Math.random()*0.2})`;
                 ctx.fillRect((i*73 + cameraOffsetX*0.1) % canvas.width, (i*41) % canvas.height, 2, 2);
             }
 
-            // الظلام الدامس للمرحلة 9 (يرسم فوق كل شيء لاحقاً، نجهزه هنا)
             let isDarkMode = (currentLevel === 9);
 
-            // رسم المنصات
             for (let p of platforms) {
                 if (p.type === 'hidden' && !p.revealed) continue;
                 const screenX = p.x - cameraOffsetX;
                 ctx.fillStyle = p.color;
                 ctx.fillRect(screenX, p.y, p.w, p.h);
                 
-                // عشب أو إضاءة للمنصات
                 if (p.type === 'solid' || p.type === 'falling_platform') {
                     ctx.fillStyle = '#1abc9c';
                     ctx.fillRect(screenX, p.y, p.w, 10);
@@ -452,7 +450,6 @@
                 }
             }
 
-            // رسم الفخاخ والمسامير
             for (let t of traps) {
                 const screenX = t.x - cameraOffsetX;
                 if (t.type === 'death' || t.type === 'moving_spikes') {
@@ -464,7 +461,7 @@
                     ctx.fillStyle = t.color;
                     ctx.fillRect(screenX, t.y, t.w, t.h);
                     ctx.fillStyle = '#ff2a5f';
-                    ctx.fillRect(screenX, t.y + t.h - 5, t.w, 5); // حافة دموية للسقف
+                    ctx.fillRect(screenX, t.y + t.h - 5, t.w, 5);
                 } else if (t.type === 'spike_up' || t.type === 'spike_down') {
                     ctx.fillStyle = '#ff2a5f';
                     ctx.beginPath();
@@ -477,7 +474,6 @@
                 }
             }
 
-            // رسم الليزر
             for(let l of lasers) {
                 const screenX = l.x - cameraOffsetX;
                 if(l.active) {
@@ -486,27 +482,23 @@
                     ctx.shadowColor = 'red';
                     ctx.fillRect(screenX, l.y, l.w, l.h);
                     ctx.shadowBlur = 0;
-                    // خط أبيض بالوسط للواقعية
                     ctx.fillStyle = '#fff';
                     ctx.fillRect(screenX + 3, l.y, 4, l.h);
                 } else {
-                    // ليزر طافي (مؤشر ضعيف)
                     ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
                     ctx.fillRect(screenX, l.y, l.w, l.h);
                 }
             }
 
-            // رسم العلم الحقيقي والمزيف
             const drawFlag = (f, color) => {
                 const sx = f.x - cameraOffsetX;
                 ctx.fillStyle = '#FFF'; ctx.fillRect(sx, f.y, 5, f.h);
                 ctx.fillStyle = color;
                 ctx.beginPath(); ctx.moveTo(sx+5, f.y); ctx.lineTo(sx+40, f.y+15); ctx.lineTo(sx+5, f.y+30); ctx.fill();
             }
-            drawFlag(flag, '#2ecc71'); // الحقيقي أخضر
-            for(let ff of fakeFlags) drawFlag(ff, '#2ecc71'); // المزيف نفس اللون بالضبط!
+            drawFlag(flag, '#2ecc71');
+            for(let ff of fakeFlags) drawFlag(ff, '#2ecc71');
 
-            // تأثير الذيل (Trail)
             if(!isDead && player.trail.length > 0) {
                 for(let i=0; i<player.trail.length; i++) {
                     let pt = player.trail[i];
@@ -515,13 +507,11 @@
                 }
             }
 
-            // رسم اللاعب
             if (!isDead) {
                 const px = player.x - cameraOffsetX;
                 ctx.fillStyle = player.color;
                 ctx.fillRect(px, player.y, player.w, player.h);
                 
-                // العيون
                 ctx.fillStyle = 'white';
                 if (player.facing === 'right') {
                     ctx.fillRect(px + 18, player.y + 5, 8, 8);
@@ -532,7 +522,6 @@
                 }
             }
 
-            // رسم الجسيمات
             for (let p of particles) {
                 ctx.globalAlpha = p.life / 30;
                 ctx.fillStyle = p.color;
@@ -540,15 +529,12 @@
                 ctx.globalAlpha = 1;
             }
 
-            // تطبيق الظلام للمرحلة 9 (Overlay)
             if(isDarkMode && !isDead) {
                 const px = player.x - cameraOffsetX + player.w/2;
                 const py = player.y + player.h/2;
-                
                 let gradient = ctx.createRadialGradient(px, py, 20, px, py, 150);
                 gradient.addColorStop(0, 'rgba(0,0,0,0)');
                 gradient.addColorStop(1, 'rgba(0,0,0,0.98)');
-                
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
@@ -561,7 +547,7 @@
             deaths++;
             deathCountEl.innerText = deaths;
             
-            // إصلاح المشكلة السابقة: استخدام player.y + player.h/2
+            // استدعاء الجسيمات للانفجار
             createParticles(player.x + player.w/2, player.y + player.h/2, 50, '#ff2a5f');
             
             gameContainer.classList.add('shaking');
@@ -584,14 +570,13 @@
                    r1.y < r2.y + r2.h && r1.y + r1.h > r2.y;
         }
 
-        // حلقة اللعبة المستمرة
         function loop(timestamp) {
             update(timestamp);
             draw();
             requestAnimationFrame(loop);
         }
 
-        // ------------------ نظام التحكم (أسهم + كيبورد) ------------------
+        // ------------------ نظام التحكم (أسهم + كيبورد + لمس) ------------------
         window.addEventListener('keydown', e => keys[e.key] = true);
         window.addEventListener('keyup', e => keys[e.key] = false);
 
@@ -614,7 +599,7 @@
             deathCountEl.innerText = deaths;
             gameStarted = true;
             loadLevel(1);
-            requestAnimationFrame(loop); // تشغيل اللوب بعد الضغط
+            requestAnimationFrame(loop);
         });
 
         restartButton.addEventListener('click', () => {
@@ -625,7 +610,7 @@
             loadLevel(1);
         });
 
-        // رسم خلفية أولية للشاشة
+        // رسم أولي
         draw();
     </script>
 </body>
